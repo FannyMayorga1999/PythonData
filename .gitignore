@@ -1,0 +1,7 @@
+# dependencies
+csv/Indicators.csv
+csv/daily_weather.csv
+csv/minute_weather.csv
+csv/queue_calls.csv
+csv/queue_cdr.csv
+.csv
