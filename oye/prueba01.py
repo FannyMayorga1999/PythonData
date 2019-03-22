@@ -13,18 +13,23 @@ data = pd.read_csv("C:/Users/admin/Documents/Fanny Mayorga/Python/csv/queue_call
 data.drop(['contactid','firstname','lastname','companyid',	'legalname','tradename','entity','callgrade'], axis='columns', inplace=True)
 
 data.fillna(0, inplace=True)
-#data['date'] = pd.to_datetime(data['date']) 
+data['date'] = pd.to_datetime(data['date']) 
+"""
+hist_indicator = 'H_INF'
+mask2 = data['callid']<32933
+#fanny = 'H_CIT'
 
-hist_indicator = 'H_INF' 
+#mask1 = data['queue'].str.contains(hist_indicator)
+#mask2 = data['callid'].str.isin([hist_calling])    
 
-mask1 = data['queue'].str.contains(hist_indicator) 
+#mask2 = data['queue'].str.contains(fanny) 
+data01 = data[ mask2]
 
-
-data[mask1]
-
-plt.bar(data['date'].values, data['queue'].values)
-
+#data[mask1]
+plt.plot(data01['date'].values, data01['queue'].values)
 plt.show()
+"""
+
 """
 before_rows = data.shape[0]                               
 
