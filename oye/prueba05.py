@@ -1,12 +1,12 @@
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier 
-from sklearn.metrics import classification_report
-from sklearn.metrics import confusion_matrix
+from sklearn.datasets import load_iris
 import pandas as pd
 import numpy as np 
 import matplotlib.pyplot as plt
 import datetime as dt
 import seaborn as sb
+from pandas.plotting import parallel_coordinates
 
 data = pd.read_csv("C:/Users/admin/Documents/Fanny Mayorga/Python/csv/queue_calls.csv",parse_dates=True)
 
@@ -29,6 +29,7 @@ before_rows - afther_rows
 mask1 = data['date'] < '2019-03-01' 
 mask2 = data['date'] > '2019-01-01'
 data = data[mask1 & mask2]
+sb.factorplot(data.index,data=data,kind="count", aspect=3)
 
 y = data[['queue']].copy()
 morning_features = ['date']
@@ -49,5 +50,13 @@ DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
 predictions = future.predict(X_test)
 predictions[:20]
 
-sb.factorplot(data.index,data=data,kind="count", aspect=3)
+"""plt.bar(values, data['queueid'].values)
+plt.xlabel('date')
+plt.ylabel(data['queueid'].iloc[0])
+plt.title('queue')
+plt.show()
+"""
+
+
+
 plt.show()

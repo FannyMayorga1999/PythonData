@@ -1,29 +1,32 @@
 from sklearn.preprocessing import StandardScaler
-from sklearn.cluster import KMeans
-import utils           
 import pandas as pd
+from sklearn.cluster import KMeans
 import numpy as np 
-from itertools import cycle, islice
 import matplotlib.pyplot as plt
+import datetime as dt
+#import seaborn as sb
 from pandas.plotting import parallel_coordinates
 
-data = pd.read_csv("C:/Users/admin/Documents/Fanny Mayorga/Python/csv/queue_calls.csv")
+data = pd.read_csv("C:/Users/admin/Documents/Fanny Mayorga/Python/csv/queue_calls.csv",parse_dates=True)
 
-print(type(data['date']))
+data.drop(['contactid','firstname','lastname','companyid',	'legalname','tradename','entity','callgrade'], axis='columns', inplace=True)
 
-"""
-data['time'] = pd.to_datetime(data['time']) 
-data['holdtime'] = pd.to_datetime(data['holdtime'])
-data['calltime'] = pd.to_datetime(data['calltime'])
-"""
-"""
+data = data.groupby(['queue']).sum()
+ 
+data.fillna(0, inplace=True)
 
-data['time'] = data['time'].astype(np.int64)
-data['holdtime'] = data['holdtime'].astype(np.int64)
-data['calltime'] = data['calltime'].astype(np.int64)
-"""
+data.describe().transpose()
 
-"""
+#mask1 = data['date'] < '2019-03-01' 
+#mask2 = data['date'] > '2019-01-01'
+#data = data[mask1 & mask2]
+
+#data['date'] = pd.to_datetime(data['date'])
+
+
+
+features = ['queueid']
+
 select_df = data[features]
 
 X = StandardScaler().fit_transform(select_df)
@@ -31,8 +34,6 @@ X = StandardScaler().fit_transform(select_df)
 kmeans = KMeans(n_clusters=12)
 model = kmeans.fit(X)
 labels = kmeans.predict(X)
-
-#labels = kmeans.predict(X)
 centers = kmeans.cluster_centers_
 
 def pd_centers(featuresUsed, centers):
@@ -51,6 +52,10 @@ def parallel_plot(data):
 
 P =  pd_centers(features,centers)
 
+parallel_plot(P)
 
-parallel_plot(P[P['relative_humidity']< 'H_INF'])  
-"""
+
+#print(data.dtypes)
+print(data.head(5))
+
+plt.show()
