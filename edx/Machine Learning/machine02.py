@@ -12,6 +12,7 @@ data = pd.read_csv("C:/Users/admin/Documents/Fanny Mayorga/Python/csv/minute_wea
 sampled_df = data[(data['rowID'])%10 == 0]
 
 sampled_df.describe().transpose()
+
 sampled_df[sampled_df['rain_accumulation']==0].shape
 sampled_df[sampled_df['rain_duration']==0].shape
 
@@ -61,5 +62,6 @@ P =  pd_centers(features,centers)
 parallel_plot(P[P['relative_humidity']< -0.5])                              #dias secos
 #parallel_plot(P[P['air_temp']> 0.5])                                        #dias calidos                             
 #parallel_plot(P[(P['relative_humidity']>0.5) & (P['air_temp']<0.5)])        #dias frios
-
+print(sampled_df.dtypes)
+print(data.dtypes)
 plt.show()

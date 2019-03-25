@@ -11,4 +11,3 @@ import datetime
 #declaro una variable para obtener el tiempo a tiempo real 
 x = datetime.datetime.now()
 print(x)
-

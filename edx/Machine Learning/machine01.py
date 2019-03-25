@@ -3,6 +3,8 @@ from sklearn.model_selection import train_test_split        #selecciona los mode
 from sklearn.tree import DecisionTreeClassifier             #Arbol decisiones de los modelos
 from sklearn.metrics import accuracy_score                  #Importamos el clasificador de árboles de decisión.
 
+import matplotlib.pyplot as plt
+
 data= pd.read_csv("C:/Users/admin/Documents/Fanny Mayorga/Python/csv/daily_weather.csv")
 
 data[data.isnull().any(axis=1)]                             #limpía la data de valores nulos
@@ -42,3 +44,9 @@ predictions = humidy_classifier.predict(X_test)
 print(predictions[:10])
 
 print(y_test['high_humidity_label'][:10])
+
+"""plt.bar(X_test.values, y_test.values)
+plt.xlabel(y_test)
+plt.ylabel(y_test.iloc[0])
+plt.title('High Humidity Label')
+plt.show("""
