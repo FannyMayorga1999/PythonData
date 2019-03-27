@@ -11,9 +11,6 @@ data = pd.read_csv("C:/Users/admin/Documents/Fanny Mayorga/Python/csv/queue_call
 
 data.drop(['contactid','firstname','lastname','companyid',	'legalname','tradename','entity','callgrade'], axis='columns', inplace=True)
 
-data = data.groupby(['date']).sum()
-
-print(data.head())
 
 data = data.groupby(['date']).sum()
 

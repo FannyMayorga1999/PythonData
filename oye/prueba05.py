@@ -48,7 +48,7 @@ DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
                     splitter='best')
 
 predictions = future.predict(X_test)
-predictions[:20]
+print(predictions[:20])
 
 """plt.bar(values, data['queueid'].values)
 plt.xlabel('date')
@@ -59,4 +59,4 @@ plt.show()
 
 
 
-plt.show()
+#plt.show()

@@ -18,8 +18,6 @@ data = data[mask1 & mask2]
 
 data[(data['rowid'])%10 == 0]
 
-#data['index'] = pd.to_datetime(data['index']) 
-
 data.describe().transpose
 
 data.fillna(0, inplace=True)
@@ -31,10 +29,6 @@ data = data.dropna()
 afther_rows = data.shape[0]
 
 before_rows - afther_rows
-#print(data.head(10))
-#print(data.index)
-#print(data.columns)
-
 
 features = ['queueid']
 
