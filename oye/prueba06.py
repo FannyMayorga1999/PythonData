@@ -28,7 +28,7 @@ before_rows - afther_rows
 data.reset_index(level=0, inplace=True)
 
 mask1 = data['date'] < '2019-03-01' 
-mask2 = data['date'] > '2017-01-01'
+mask2 = data['date'] > '2018-01-01'
 
 data = data[mask1 & mask2]
 
@@ -58,6 +58,9 @@ LinearRegression(copy_X=True, fit_intercept=True,n_jobs=True, normalize=False)
 
 y_prediction = future.predict(X_test)
 y_test01 = future.predict(X_train)
+
+print(y_prediction[:10])
+print(y_test01[:10])
 
 
 #print(y_prediction)
