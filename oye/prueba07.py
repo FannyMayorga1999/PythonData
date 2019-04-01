@@ -12,7 +12,7 @@ data = pd.read_csv("C:/Users/admin/Documents/Fanny Mayorga/Python/csv/queue_call
 data['queue'] = data['queue'].replace(('Servicios Preferenciales','H_EAV','H_CCC','H_CIT','H_INF','H_AMB','H_MAD','M_UIO','H_HOS','H_ACT','H_DEN','M_GYE','H_VEN','M_SAC','M_COR','H_ECA'),1)
 
 data['queue'] = data['queue'].astype("int64")
- 
+
 data = data.groupby(['date']).sum()
 
 data.fillna(0, inplace=True)
@@ -67,10 +67,19 @@ print(y_prediction[:10])
 #print(y_test01[:5])
 print(data.head(11))
 
+fig, ax = plt.subplots()
+
 plt.scatter(x,y)
 plt.plot(x,y_m, color='red')
 plt.xlabel('date')
 plt.ylabel('queue')
 plt.title('calls per days')
 plt.grid()
+
+
+"""plt.plot(data['date'], data['queue'].values)
+plt.xlabel('date')
+plt.ylabel(data['queue'].iloc[0])
+plt.title('queue')"""
 plt.show()
+
