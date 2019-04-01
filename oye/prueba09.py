@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.linear_model import LinearRegression
+from sklearn import linear_model
 from sklearn.model_selection import train_test_split           
 from sklearn.metrics import mean_squared_error,r2_score
 from math import sqrt    
@@ -46,11 +46,14 @@ x = data[target]
 
 X_train, X_test ,  y_train , y_test = train_test_split(x,y , test_size=0.20, random_state=42)
 
-future = LinearRegression()
+future = linear_model.Lasso()
+
+linear_model.Lasso(alpha=0.1, copy_X=True, fit_intercept=True, max_iter=1000,
+   normalize=False, positive=False, precompute=False, random_state=None,
+   selection='cyclic', tol=0.0001, warm_start=False)
 
 future.fit(X_train, y_train)
 
-LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None,normalize=False)
 
 y_prediction = future.predict(X_test).astype("int64")
 #y_test01 = future.predict(X_train).astype("int64")
@@ -64,7 +67,6 @@ b = future.intercept_
 y_m = m*x+b
 
 print(y_prediction[:10])
-#print(y_test01[:5])
 print(data.head(11))
 
 plt.scatter(x,y)
