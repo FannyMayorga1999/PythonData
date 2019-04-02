@@ -33,6 +33,8 @@ select_df = sampled_df[features]
 
 X = StandardScaler().fit_transform(select_df)
 
+print(X.shape)
+
 kmeans = KMeans(n_clusters=12)
 model = kmeans.fit(X)
 labels = kmeans.predict(X)
@@ -62,6 +64,6 @@ P =  pd_centers(features,centers)
 parallel_plot(P[P['relative_humidity']< -0.5])                              #dias secos
 #parallel_plot(P[P['air_temp']> 0.5])                                        #dias calidos                             
 #parallel_plot(P[(P['relative_humidity']>0.5) & (P['air_temp']<0.5)])        #dias frios
-print(sampled_df.dtypes)
-print(data.dtypes)
+#print(sampled_df.dtypes)
+#print(data.dtypes)
 plt.show()
