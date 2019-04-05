@@ -11,10 +11,11 @@ data = pd.read_csv("C:/Users/admin/Documents/Fanny Mayorga/Python/csv/queue_call
 
 data['queue'] = data['queue'].replace(('Servicios Preferenciales','H_EAV','H_CCC','H_CIT','H_INF','H_AMB','H_MAD','M_UIO','H_HOS','H_ACT','H_DEN','M_GYE','H_VEN','M_SAC','M_COR','H_ECA'),1)
 data['date'] = data['date'].astype("datetime64[ns]")
+data['date'] = data['date'].astype("int64")
 data['queue'] = data['queue'].astype("int64")
 data['time'] = data['time'].astype("datetime64[ns]")
 data['time'] = data['time'].dt.hour
-data = data.groupby(['date','time']).sum()
+data = data.groupby(['time']).sum()
 
 data.fillna(0, inplace=True)
 
@@ -34,8 +35,9 @@ mask2 = data.index < '2019-03-27' """
 #data = data[mask1 & mask2]
 
 data['date'] = data['date'].astype("int64")
+data['date'] = data['date'].astype("datetime64[ns]")
 
-features = ['queue']
+"""features = ['queue']
 
 y = data[features]
 
@@ -56,16 +58,16 @@ m = future.coef_[0]
 b = future.intercept_
 y_m = m*x+b
 
-data['date'] = data['date'].astype("datetime64[ns]")
+"""
 
-print(y_prediction[:10])
+#print(y_prediction[:10])
 print(data.head(9))
 
-plt.scatter(x,y)
+"""plt.scatter(x,y)
 plt.plot(x,y_m, color='red')
 plt.xlabel('time')
 plt.ylabel('queue')
 plt.title('calls per days')
 plt.grid()
-plt.show()
+plt.show()"""
 
