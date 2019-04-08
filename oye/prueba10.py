@@ -16,7 +16,7 @@ data['time'] = data['time'].map(lambda x: x.replace(second=0, minute=0))
 data['queue'] = data['queue'].astype("int64")
 
  
-data = data.groupby(['date','time']).sum()
+data = data.groupby(['time','date']).sum()
 
 data.fillna(0, inplace=True)
 
