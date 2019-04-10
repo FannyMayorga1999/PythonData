@@ -13,29 +13,23 @@ data['queue'] = data['queue'].replace(('Servicios Preferenciales','H_EAV','H_CCC
 data['queue'] = data['queue'].astype("int64")
 data['date'] = data['date'].astype("datetime64[ns]")
 data['time'] = data['time'].astype("datetime64[ns]")
-#data['time'] = data['time'].map(lambda x: x.replace(second=0, minute=0))
+data['time'] = data['time'].map(lambda x: x.replace(second=0, minute=0))
 data['time'] = data['time'].dt.hour
-data = data.groupby(['date','time']).sum()
 data.fillna(0, inplace=True)
+data01 = data.groupby(['date','time']).queue.sum()
+df = data01.unstack()
+df.fillna(0, inplace=True)
+mask1 = df.index > '2019-02-01'
+mask2 = df.index < '2019-03-27'
 
+df = df[mask1 & mask2]
 
-mask1 = data['date'] > '2019-01-01'
-mask2 = data['date'] < '2019-03-27'
-data = data[mask1 & mask2]
+pd.options.display.float_format = '{:,.0f}'.format
 
-data['date'] = data['date'].astype("datetime64[ns]")
-data01 = np.array([data['queue']]*1271).T
+print(df.head(30))
 
-df = pd.DataFrame(data01,index=data['date'],columns=data['time'])
-#df = df.fillna(0) 
-
-#pandas.concat([df['foo'].dropna(), df['bar'].dropna()]).reindex_like(df)
-#df = df.groupby(df.index).sum()
-# data01 = pd.DataFrame(index=data['date'], columns=data['time'])
-#df = df.groupby(df.index,as_index = False).mean()
-
-print(data.head(10))
-print(df.head(10))
-print(df.shape)
-#print(data.dtypes)
-
+plt.bar(df.index.values, df[0].values)
+plt.xlabel('date')
+plt.ylabel(df[0].iloc[0])
+plt.title('hours')
+plt.show()
